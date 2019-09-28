@@ -2,6 +2,7 @@ package or.kosta.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import or.kosta.mvc.dao.MemberDAO;
 import or.kosta.vo.MemberVO;
+import or.kosta.vo.RegMemberVO;
 
 @Controller
 public class Controll {
@@ -35,11 +37,35 @@ public class Controll {
 		return mav;
 	}
 
-	@RequestMapping("/index")
+	@RequestMapping(value= {"/","/index"})
 	public String page() {
 		return "index";
 	}
 
+	@RequestMapping(value="/insert")
+	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
+	@ResponseBody//jsp에 결과값 리턴
+	public synchronized String insertData(RegMemberVO vo) throws IOException
+	{
+		String ret="";
+		try {
+			//date 설정
+			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			vo.setMdate(f.format(System.currentTimeMillis()));
+			System.out.println("!!! " +vo.getMdate());
+			//db에 데이터 insert
+			ret = dao.insertMember(vo);
+			
+			List<RegMemberVO> list = new ArrayList<RegMemberVO>();
+			list = dao.getMembers();
+			return ret;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			return ret;
+		}
+	}
+	
 	@RequestMapping(value="/signIn", method = RequestMethod.POST)//url로 접근
 	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
 	@ResponseBody//jsp에 결과값 리턴

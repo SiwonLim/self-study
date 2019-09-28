@@ -7,4 +7,16 @@
 insert into member values(member_seq.nextval,#{id},#{pwd},#{name},#{mdate})
 </insert>
 <select id="getM" resultType="mvo">select * from member order by num asc</select>
+<select id="getMembers" resultType="rvo">
+select * from regMember order by id asc
+</select>
+<select id="chkDup_username" parameterType="String" resultType="int">
+select count(*) from regMember where username=#{username}
+</select>
+<select id="chkDup_email" parameterType="String" resultType="int">
+select count(*) from regMember where email=#{email}
+</select>
+<insert id="insertMember" parameterType="rvo">
+insert into regMember values(reg_seq.nextval,#{firstname},#{lastname},#{username},#{email},#{gender},#{pwd},to_date(#{mdate},'YYYY-MM-DD HH24:MI:SS'))
+</insert>
 </mapper>
