@@ -5,15 +5,14 @@
 <head>
 <title>회원가입</title>
 <!-- 자바스크립트 사용위해서 -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- MATERIAL DESIGN ICONIC FONT -->
 <link rel="stylesheet"
 	href="././resources/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 <!-- STYLE CSS -->
 <link rel="stylesheet" href="././resources/css/style.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" charset="UTF-8">
 var items = {//enum
