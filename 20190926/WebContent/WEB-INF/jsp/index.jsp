@@ -41,8 +41,8 @@ function insertToDB(obj){
 				{
 				case 'ok':
 					alert("회원가입이 완료되었습니다!");
-					location.reload();
 					obj=null;
+					location.href="/20190926/home";
 					break;
 				case 'dup_username':
 					alert("username 중복입니다.");
@@ -78,7 +78,6 @@ $(function() {
 			alert("Confirm Password 패스워드가 틀립니다.");
 			return false;
 		} else {
-			alert("ajax로 값 저장");
 			listToObj(arr);
 			insertToDB(obj);
 			//회원가입 완료. 메인페이지로 넘어가던가 마이페이지로 넘어가기

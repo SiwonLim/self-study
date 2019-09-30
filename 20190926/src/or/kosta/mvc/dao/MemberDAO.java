@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.support.SQLExceptionSubclassTranslator;
 import org.springframework.stereotype.Repository;
 
+import or.kosta.vo.CoulmnVO;
 import or.kosta.vo.MemberVO;
 import or.kosta.vo.RegMemberVO;
 
@@ -16,14 +18,6 @@ import or.kosta.vo.RegMemberVO;
 public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate ss;
-
-	public List<MemberVO> getList() {
-		return ss.selectList("member.getM");
-	}
-
-	public void insertData(MemberVO vo) {
-		ss.insert("member.insert", vo);
-	}
 
 	public String insertMember(RegMemberVO vo)
 	{
@@ -41,8 +35,19 @@ public class MemberDAO {
 			return "error";
 		}
 	}
-
+	public void delData(int id) throws DataAccessException
+	{
+		ss.delete("member.delData",id);
+	}
+	public List<CoulmnVO> getColumn()
+	{
+		return ss.selectList("member.getColumn");
+	}
 	public List<RegMemberVO> getMembers() {
 		return ss.selectList("member.getMembers");
+	}
+	public RegMemberVO getMember(int id)
+	{
+		return ss.selectOne("member.getData",id);
 	}
 }

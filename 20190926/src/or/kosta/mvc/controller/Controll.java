@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import or.kosta.mvc.dao.MemberDAO;
+import or.kosta.vo.CoulmnVO;
 import or.kosta.vo.MemberVO;
 import or.kosta.vo.RegMemberVO;
 
@@ -41,7 +42,65 @@ public class Controll {
 	public String page() {
 		return "index";
 	}
+	
+	@RequestMapping("/home")
+	public Object home()
+	{
+		return "test";
+	}
 
+	@RequestMapping("/getColumn")
+	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
+	@ResponseBody//jsp에 결과값 리턴
+	public Object getColumn()
+	{
+		List<CoulmnVO> list = new ArrayList<CoulmnVO>();
+		list = dao.getColumn();
+		//비번은 제외하고 리턴해야됨
+		return (Object)list;
+	}
+	
+	@RequestMapping("/delData")
+	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
+	@ResponseBody//jsp에 결과값 리턴
+	public String delData(int id)
+	{
+		try {
+			dao.delData(id);
+			return "ok";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "error";
+		}
+	}
+	@RequestMapping(value="/editData")
+	public ModelAndView editData(int id)
+	{
+		RegMemberVO vo = dao.getMember(id);
+		List<String> s = new ArrayList<String>();
+		s.add(Integer.toString(vo.getId()));
+		s.add("22");
+		s.add(vo.getFirstname());
+		s.add(vo.getLastname());
+		s.add(vo.getUsername());
+		s.add(vo.getEmail());
+		s.add(vo.getGender());
+		s.add(vo.getMdate());
+		ModelAndView m = new ModelAndView("edit");
+		m.addObject("data", s);
+		return m;
+	}
+	
+	@RequestMapping("/getData")
+	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
+	@ResponseBody//jsp에 결과값 리턴
+	public Object getData()
+	{
+		List<RegMemberVO> list = new ArrayList<RegMemberVO>();
+		list = dao.getMembers();
+		return (Object)list;
+	}
+	
 	@RequestMapping(value="/insert")
 	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
 	@ResponseBody//jsp에 결과값 리턴
@@ -55,45 +114,11 @@ public class Controll {
 			System.out.println("!!! " +vo.getMdate());
 			//db에 데이터 insert
 			ret = dao.insertMember(vo);
-			
-			List<RegMemberVO> list = new ArrayList<RegMemberVO>();
-			list = dao.getMembers();
 			return ret;
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 			return ret;
 		}
-	}
-	
-	@RequestMapping(value="/signIn", method = RequestMethod.POST)//url로 접근
-	@ResponseStatus(value = HttpStatus.OK)//예외처리 담당
-	@ResponseBody//jsp에 결과값 리턴
-	public Object signIn(MemberVO mvo) throws IOException {
-		// 값을 저장
-		System.out.println(mvo.getId());
-		System.out.println(mvo.getPwd());
-		System.out.println(mvo.getName());
-		System.out.println(mvo.getMdate());
-		try {
-			//dao.insertData(mvo);
-			List<MemberVO> list = new ArrayList<MemberVO>();
-			list = dao.getList();
-			System.out.println(list.size());
-			for (int i = 0; i < list.size(); i++) {
-				MemberVO d = new MemberVO();
-				d = list.get(i);
-				System.out.print(d.getNum() + " / ");
-				System.out.print(d.getId() + " / ");
-				System.out.print(d.getPwd() + " / ");
-				System.out.print(d.getName() + " / ");
-				System.out.println(d.getMdate());
-			}
-			return "ok";// 결과를 다시 jsp에 돌려주는 메소드..
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "error";
-		}
-		
 	}
 }
