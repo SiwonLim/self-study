@@ -4,5 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="or.topia.vo.User_infoVO" alias="ivo" />
 	</typeAliases>
 </configuration>
