@@ -2,9 +2,140 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="personalHistory">
-<select id="userList" resultType="hashMap" parameterType="hashMap">
-select user_idx,user_name,user_dept,user_register_date
-from user_info where user_idx between ${prevLimit} and ${dataSize};
-</select>
+<mapper namespace="history">
+	<!-- 고정데이터 저장 -->
+	<insert id="registerUser" parameterType="hashmap">
+		INSERT INTO user_info
+		(
+		user_name
+		<if test="userSocialSecunum != null">, user_social_secunum</if>
+		<if test="userSex != null">, user_sex</if>
+		<if test="userComp != null">, user_comp</if>
+		<if test="userCompEnterdate != null">, user_comp_enterdate</if>
+		<if test="userDept != null">, user_dept</if>
+		<if test="userSpot != null">, user_spot</if>
+		<if test="userArmyServPeriod != null">, user_army_serv_period</if>
+		<if test="userMaritalStatus != null">, user_marital_status</if>
+		<if test="userArmyServEnter != null">, user_army_serv_enter</if>
+		<if test="userArmyServLeave != null">, user_army_serv_leave</if>
+		<if test="userArmyServ != null">, user_army_serv</if>
+		<if test="userTelnumWired != null">, user_telnum_wired</if>
+		<if test="userTelnumWireless != null">, user_telnum_wireless</if>
+		<if test="userEmail != null">, user_email</if>
+		<if test="userZipcode != null">, user_zipcode</if>
+		<if test="userAddress != null">, user_address</if>
+		<if test="userRegisterDate != null">,user_register_date</if>
+		,user_idx
+		)
+		VALUES (
+		#{userName}
+		<if test="userSocialSecunum != null">, #{userSocialSecunum}</if>
+		<if test="userSex != null">, #{userSex}</if>
+		<if test="userComp != null">, #{userComp}</if>
+		<if test="userCompEnterdate != null">, #{userCompEnterdate}</if>
+		<if test="userDept != null">, #{userDept}</if>
+		<if test="userSpot != null">, #{userSpot}</if>
+		<if test="userArmyServPeriod != null">, #{userArmyServPeriod}</if>
+		<if test="userMaritalStatus != null">, #{userMaritalStatus}</if>
+		<if test="userArmyServEnter != null">, #{userArmyServEnter}</if>
+		<if test="userArmyServLeave != null">, #{userArmyServLeave}</if>
+		<if test="userArmyServ != null">, #{userArmyServ}</if>
+		<if test="userTelnumWired != null">, #{userTelnumWired}</if>
+		<if test="userTelnumWireless != null">, #{userTelnumWireless}</if>
+		<if test="userEmail != null">, #{userEmail}</if>
+		<if test="userZipcode != null">, #{userZipcode}</if>
+		<if test="userAddress != null">, #{userAddress}</if>
+		,SYSTIMESTAMP
+		,user_seq.nextval
+		)
+		<selectKey keyProperty="userIdxvalue" resultType="int" order="AFTER">
+			select user_seq.currval from dual
+		</selectKey>
+	</insert>
+
+	<!-- 동적 데이터 저장 -->
+	<insert id="insertUserFlexibleData" parameterType="hashmap">
+		<selectKey keyProperty="childKey" resultType="int" order="BEFORE">
+			select nvl(max(${tbName}_idx),0)+1 from user_info_${tbName}
+		</selectKey>
+		INSERT INTO user_info_${tbName}
+		(
+		<!-- user idx : foreign key -->
+		${tbName}_idx
+		, user_idx
+		<if test="eduSchoolName != null">, edu_school_name</if>
+		<if test="eduStatus != null">, edu_status</if>
+		<if test="eduYear != null">, edu_year</if>
+		<if test="eduMonth != null">, edu_month</if>
+
+		<if test="qualifiName != null">, qualifi_name</if>
+		<if test="qualifiGetdate != null">, qualifi_getdate</if>
+
+		<if test="careerCompName != null">, career_comp_name</if>
+		<if test="careerEnterdate != null">, career_enterdate</if>
+		<if test="careerLeavedate != null">, career_leavedate</if>
+		<if test="careerSpot != null">, career_spot</if>
+		<if test="careerResponsib != null">, career_responsib</if>
+
+		<if test="trainingName != null">, training_name</if>
+		<if test="trainingStratdate != null">, training_startdate</if>
+		<if test="trainingEnddate != null">, training_enddate</if>
+		<if test="trainingAgency != null">, training_agency</if>
+
+		<if test="licenName != null">, licen_name</if>
+		<if test="licenSkillLevel != null">, licen_skill_level</if>
+
+		<if test="skillProjectName != null">, skill_project_name</if>
+		<if test="skillStartdate != null">, skill_startdate</if>
+		<if test="skillEnddate != null">, skill_enddate</if>
+		<if test="skillCustomerComp != null">, skill_customer_comp</if>
+		<if test="skillWorkComp != null">, skill_work_comp</if>
+		<if test="skillIndustry != null">, skill_industry</if>
+		<if test="skillApplied != null">, skill_applied</if>
+		<if test="skillRole != null">, skill_role</if>
+		<if test="skillModel != null">, skill_model</if>
+		<if test="skillOS != null">, skill_os</if>
+		<if test="skillLang != null">, skill_lang</if>
+		<if test="skillDBMS != null">, skill_dbms</if>
+		<if test="skillTool != null">, skill_tool</if>
+		<if test="skillComm != null">, skill_comm</if>
+		<if test="skillETC != null">, skill_etc</if>
+		)
+		VALUES (
+		#{childKey}
+		,#{userIdx}
+		<if test="eduSchoolName != null">, #{eduSchoolName}</if>
+		<if test="eduStatus != null">, #{eduStatus}</if>
+		<if test="eduYear != null">, #{eduYear}</if>
+		<if test="eduMonth != null">, #{eduMonth}</if>
+		<if test="qualifiName != null">, #{qualifiName}</if>
+		<if test="qualifiGetdate != null">, #{qualifiGetdate}</if>
+		<if test="careerCompName != null">, #{careerCompName}</if>
+		<if test="careerEnterdate != null">, #{careerEnterdate}</if>
+		<if test="careerLeavedate != null">, #{careerLeavedate}</if>
+		<if test="careerSpot != null">, #{careerSpot}</if>
+		<if test="careerResponsib != null">, #{careerResponsib}</if>
+		<if test="trainingName != null">, #{trainingName}</if>
+		<if test="trainingStratdate != null">, #{trainingStratdate}</if>
+		<if test="trainingEnddate != null">, #{trainingEnddate}</if>
+		<if test="trainingAgency != null">, #{trainingAgency}</if>
+		<if test="licenName != null">, #{licenName}</if>
+		<if test="licenSkillLevel != null">, #{licenSkillLevel}</if>
+		<if test="skillProjectName != null">, #{skillProjectName}</if>
+		<if test="skillStartdate != null">, #{skillStartdate}</if>
+		<if test="skillEnddate != null">, #{skillEnddate}</if>
+		<if test="skillCustomerComp != null">, #{skillCustomerComp}</if>
+		<if test="skillWorkComp != null">, #{skillWorkComp}</if>
+		<if test="skillIndustry != null">, #{skillIndustry}</if>
+		<if test="skillApplied != null">, #{skillApplied}</if>
+		<if test="skillRole != null">, #{skillRole}</if>
+		<if test="skillModel != null">, #{skillModel}</if>
+		<if test="skillOS != null">, #{skillOS}</if>
+		<if test="skillLang != null">, #{skillLang}</if>
+		<if test="skillDBMS != null">, #{skillDBMS}</if>
+		<if test="skillTool != null">, #{skillTool}</if>
+		<if test="skillComm != null">, #{skillComm}</if>
+		<if test="skillETC != null">, #{skillETC}</if>
+		)
+	</insert>
 </mapper>

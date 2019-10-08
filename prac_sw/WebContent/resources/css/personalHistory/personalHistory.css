@@ -1,0 +1,504 @@
+/*
+	global
+*/
+body{
+	min-width: 860px;
+}
+
+a:link { color: #888888; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}
+
+textarea {
+	width: 100%;
+	height: 30px;
+	resize: none;
+	overflow-y: hidden; /* prevents scroll bar flash */
+	line-height: 1.6;
+	border: none;
+}
+
+thead tr td{
+	font-size: 12px;
+}
+
+.custom-loading{
+	position: fixed;;
+	background-color: #dddddd;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    top: 0px !important;
+    display: none;
+}
+
+.loading-image{
+	width: 200px;
+    height: 200px;
+    background-image: url(../../../resources/img/icon/gif-loading-png-10.gif);
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    transform: translateY(-50%);
+}
+
+.clear-pannel{
+	clear: both;
+}
+
+td{
+	font-size: 14px;
+}
+
+tbody tr{
+	background-color:#ffffff;
+	text-align: center;
+}
+
+button {
+    background-color: #bad0e0;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 2px 10px 2px 10px;
+    border: solid 1px #666666;
+}
+
+button:hover {
+    background-color: #99b0bf;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #777777;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-size: 12px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+
+
+/*
+	input type date
+*/
+.dateInput{
+	font-size: 11px;
+	min-width: 80px;
+	background:#fff url('../../../resources/img/icon/calendar_2.png')  97% 50% no-repeat ;
+}
+
+
+/*
+	�뿤�뜑 �긽�깭�몴�떆 諛� 踰꾪듉 �젅�씠�븘�썐
+*/
+.status-display-pannel{
+	padding: 10px 10px 10px 0;
+	float: left;
+}
+.function-btn-pannel{
+	padding: 10px 10px 10px 0;
+	float: right;
+}
+
+.status-display-pannel h5{
+	color: #3b3b3b;
+	margin: 4px 0 0 16px;
+} 
+
+
+
+
+
+
+/*
+�쑀�� �젙蹂�
+*/
+.user-info-list-pannel{
+	margin:30px auto;
+	background-color:#ebf2f1;
+	padding: 20px;
+	max-width: 1080px;
+}
+
+.personal-history-title-pannel{
+	border: solid 3px #666666;
+}
+
+.user-info-list-pannel h3 {
+    text-align: center;
+}
+
+
+
+
+
+/*
+�쑀�� 湲곕낯�젙蹂� �뀒�씠釉�
+*/
+.user-info-list-pannel table{
+	border: solid 1px #666666;
+	margin: 10px 0 0 0;
+	width: 100%;
+}
+
+.user-info-list-pannel table tr{
+	height: 32px;
+}
+
+.user-info-list-pannel input{
+	width: calc(100% - 6px);
+	border: none;
+	height: 30px;
+}
+
+.user-info-list-pannel select{
+	width: 65px;
+	border: none;
+	height: 30px;
+	font-size: 11px;
+}
+
+input[type=date]{
+	font-size: 11px;
+}
+
+
+
+/*
+�쑀�� 湲곕낯�젙蹂� 泥ル쾲吏� �뀒�씠釉� �븯�쐞 td �젙�쓽
+*/
+.user-info-list-pannel .user-info-table1 td:nth-child(odd){
+	background-color:#dddddd;
+	width: 120px;
+	text-align: center;
+	font-size: 12px;
+}
+.user-info-list-pannel .user-info-table1 td:nth-child(even){
+	background-color:#ffffff;
+}
+
+
+
+
+
+/*
+�쑀�� 湲곕낯�젙蹂� �몢踰덉㎏ �뀒�씠釉� �븯�쐞 td �젙�쓽
+*/
+.user-info-list-pannel .user-info-table2 tr td:first-child{
+	background-color:#dddddd;
+	width: 120px;
+	text-align: center;
+	font-size: 12px;
+}
+.user-info-list-pannel .user-info-table2 tr td:not(:first-child){
+	background-color:#ffffff;
+}
+
+.user-info-list-pannel .user-info-table2 tr:last-child td:nth-child(2){
+	width:450px;
+}
+#userZipcode {
+	width:300px;
+}
+#personalZipcodeSearchBtn {
+	width:120px;
+	background-color:#bad0e0;
+	float:right;
+	border: solid 1px #666666;
+}
+#personalZipcodeSearchBtn:hover{
+	background-color: #99b0bf;
+}
+
+
+
+/*
+	�븰�젰�궗�빆 諛� �옄寃⑹쬆�궗�빆
+*/
+
+.edu-and-qualifi-pannel div{
+	width: 50%;
+}
+
+.edu-and-qualifi-pannel div table{
+	width: calc(100% - 6px);
+}
+
+.edu-and-qualifi-pannel .edu-table-pannel{
+	float: left;
+}
+
+.edu-and-qualifi-pannel .qualifi-table-pannel{
+	float: right;
+}
+
+.edu-and-qualifi-pannel table thead tr{
+	background-color:#dddddd;
+	text-align: center;
+}
+
+
+
+
+/*
+	寃쎈젰�궗�빆
+*/
+.career-info thead tr{
+	background-color:#dddddd;
+	text-align: center;
+}
+
+/*
+	�븰�젰�궗�빆 諛� �옄寃⑹쬆�궗�빆
+*/
+
+.training-and-licen-pannel div{
+	width: 50%;
+}
+
+.training-and-licen-pannel div table{
+	width: calc(100% - 6px);
+}
+
+.training-and-licen-pannel .training-table-pannel{
+	float: left;
+}
+
+.training-and-licen-pannel .licen-table-pannel{
+	float: right;
+}
+
+.training-and-licen-pannel thead tr{
+	background-color:#dddddd;
+	text-align: center;
+}
+
+
+
+/*
+	SKILL INVENTORY
+*/
+.skill-inventory-table thead tr{
+	background-color:#dddddd;
+	text-align: center;
+}
+
+
+/*
+	Row 異붽� 踰꾪듉
+*/
+.add-row-btn-pannel{
+	width: 100%;
+	height: 20px;
+	margin: 4px 0 0 10px;
+}
+
+.add-row-btn{
+	width: 26px;
+	height: 18px;
+	font-size: 8px;
+}
+
+
+.removeTrBtn{
+	width: 26px;
+    height: 18px;
+    position: absolute;
+    margin: 8px 0px 0 -8px;
+}
+
+.pop-user-register-pannel{
+	min-height: 100px;
+	width: 640px;
+	background: #cccccc;
+	position: absolute;
+	right: 4%;
+	top: 18%;
+	border-radius:5px;
+	opacity: 0.9;
+    border-radius: 14px;
+    display: none;
+}
+
+
+.pop-user-search-pannel{
+    height: 18px;
+    float: left;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.pop-user-search-pannel select{
+	height: 22px;
+	font-size: 11px;
+}
+
+.pop-user-search-pannel input{
+	margin: 0 0 1px 0;
+}
+
+
+.pop-user-top-btn-pannel{
+	height: 18px;
+    width: 28px;
+    background: white;
+    float: right;
+    margin: 10px 4px 10px 2px;
+    border-radius: 8px;
+}
+
+.pop-user-top-btn-pannel:hover{
+	background: #d3e7ff;
+	cursor: pointer;
+}
+
+.search-cnt-pannel{
+	float: right;
+	font-size: x-small;
+	line-height: 24px;
+	margin: 0 0 0 4px;
+}
+
+
+/**
+* 遺덈윭�삤湲� �궡 寃��깋 �궎�썙�뱶 �뙣�꼸
+*/
+
+.pop-keyword-add-btn-pannel {
+    height: 18px;
+    width: 18px;
+    background: white;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.pop-keyword-add-btn-pannel:hover{
+	background: #d3e7ff;
+	cursor: pointer;
+}
+
+.keyword-input-pannel-visible {
+    display: inline-block;
+}
+
+.keyword-input-pannel-invisible {
+    display: none;
+}
+
+.keyword-add-pannel {
+	padding: 0 4px 0 11px;
+	font-size: 12px;
+	margin: 0 0 3px 0;
+}
+
+.keyword-body {
+    padding: 0 4px 0 4px;
+    background-color: #5a89ab;
+    display: inline-block;
+    margin: 0 1px 1px 0;
+    border-radius: 9px;
+}
+
+.keyword-body button{
+	position: absolute;
+	height: 16px;
+	color: #ad0000;
+	font-size: 14px;
+	font-weight: 900;
+	border: none;
+	border-radius: inherit;
+	margin: 0px 0px 0 -28px;
+	background-color: rgba( 255, 255, 255, 0.0 );
+	cursor: pointer;
+}
+
+.keyword-body button span{
+	position: absolute;
+	margin: -10px 0px 0px 7px;
+}
+
+.keyword-remove-btn{
+	visibility: hidden;
+}
+
+.keyword-body:hover .keyword-remove-btn{
+	visibility: visible;
+}
+
+
+.keyword-input-pannel input{
+	width: 86px;
+    height: 18px;
+    font-size: 12px;
+    padding: 0 4px 0 4px;
+    border-radius: 10px;
+    border: solid 1px #cccccc;
+}
+
+
+.pop-user-minimize-btn{
+	background-color: #7b7b7b;
+	height: 4px;
+    width: 20px;
+    float: right;
+    margin: 10px 3px 10px 10px;
+    border-radius: 8px;
+}
+
+.pop-user-keyword-add-btn {
+    color: #7b7b7b;
+    text-align: center;
+    line-height: 18px;
+    font-size: 15px;
+    font-family: fantasy;
+}
+
+.pop-register-list-pannel{
+	min-height: 50px;
+    width: calc(100% - 18px);
+    background-color: white;
+    margin: 0 0 10px 9px;
+    border-radius: 10px;
+}
+
+.pop-register-list{
+	margin: 0px auto;
+    height: calc(100% - 10px);
+    width: calc(100% - 3px);
+    padding: 3px;
+}
+
+.pop-register-list thead td{
+	background-color : #cccccc;
+}
+
+.pop-register-list tbody tr:hover{
+	background-color: #fde9cc;
+	cursor: pointer;
+}
+
+.pop-paging-pannel{
+	text-align: center;
+	padding: 0 0 3px 0;
+}
