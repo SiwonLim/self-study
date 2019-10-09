@@ -50,4 +50,11 @@ public class MemberDAO {
 	{
 		return ss.selectOne("member.getData",id);
 	}
+	
+	//map으로 가져와보기
+	@SuppressWarnings("rawtype")
+	public List selectList(String queryId, Object params)
+	{
+		return ss.selectList("member.map_getMembers");
+	}
 }

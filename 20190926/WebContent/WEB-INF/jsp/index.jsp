@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +16,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" charset="UTF-8">
+//resultMap가져오기
+var l = new Array('${list.list[0]}');
+console.log(l[0]);
+var map = new Map();
+map.set("list",'${list.list}');
+console.log(map.size);
+console.log(map.get("list")[0]);
+
 var items = {//enum
 	'firstname' : 0,'lastname' : 1,'username' : 2,
 	'email' : 3,'gender' : 4,'pwd' : 5,

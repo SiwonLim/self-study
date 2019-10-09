@@ -6,6 +6,10 @@
 <select id="getMembers" resultType="rvo">
 select * from regMember order by id asc
 </select>
+<!-- map으로 가져와보기.. -->
+<select id="map_getMembers" resultType="hashmap">
+select * from regMember order by id asc
+</select>
 <select id="chkDup_username" parameterType="String" resultType="int">
 select count(*) from regMember where username=#{username}
 </select>

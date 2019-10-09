@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import or.kosta.mvc.dao.MemberDAO;
+import or.kosta.mvc.serv.PersonalHistoryServImpl;
 import or.kosta.vo.CoulmnVO;
 import or.kosta.vo.MemberVO;
 import or.kosta.vo.RegMemberVO;
@@ -29,6 +33,8 @@ public class Controll {
 
 	@Autowired
 	private MemberDAO dao;
+	@Autowired
+	private PersonalHistoryServImpl serve;
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
@@ -39,8 +45,22 @@ public class Controll {
 	}
 
 	@RequestMapping(value= {"/","/index"})
-	public String page() {
-		return "index";
+	public ModelAndView page() {
+		ModelAndView m = new ModelAndView("index");
+		//map으로 data가져오기 테스트
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			resultMap = serve.userList();
+			resultMap.forEach((key,value)->{
+				System.out.println("key : "+key);
+				System.out.println("value : "+value);
+			});
+			m.addObject("list", resultMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.getStackTrace();
+		}
+		return m;
 	}
 	
 	@RequestMapping("/home")
@@ -79,7 +99,6 @@ public class Controll {
 		RegMemberVO vo = dao.getMember(id);
 		List<String> s = new ArrayList<String>();
 		s.add(Integer.toString(vo.getId()));
-		s.add("22");
 		s.add(vo.getFirstname());
 		s.add(vo.getLastname());
 		s.add(vo.getUsername());
